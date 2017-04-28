@@ -1,0 +1,2 @@
+nakoniec(X,[],[X]).
+nakoniec(X,[N|A],[N|B]):-nakoniec(X,A,B).
