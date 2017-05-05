@@ -1,0 +1,21 @@
+połówki([],[],[]).
+połówki([Glowa|B],[Glowa|Lewa1],Prawa):-append(Srodek,[Ogon],B),połówki(Srodek,Lewa1,Prawa1),append(Prawa1,[Ogon],Prawa).
+sumuj([],0).
+sumuj([Glowa|X],B):-sumuj(X,Q),B is Glowa+Q.
+rosnący([_]).
+rosnący([Glowa|[Glowa2|Ogon]]):-rosnący([Glowa2|Ogon]),Glowa<Glowa2.
+%arytmetyczny([_]).
+arytmetyczny([_,_]).
+arytmetyczny([Glowa|[Glowa2|[Glowa3|Ogon]]]):-arytmetyczny([Glowa2|[Glowa3|Ogon]]),Glowa-Glowa2=:=Glowa2-Glowa3.
+
+pnp([],[],[]).
+pnp([Glowa|Lista],Parzyste,[Glowa|Nieparzyste]):-pnp(Lista,Parzyste,Nieparzyste),mod(Glowa,2)=\=0.
+pnp([Glowa|Lista],[Glowa|Parzyste],Nieparzyste):-pnp(Lista,Parzyste,Nieparzyste),mod(Glowa,2)=:=0.
+
+npoczatek(0,_,[]).
+npoczatek(N,[A|B],[A|T]):-N>0,Q is N-1,npoczatek(Q,B,T).
+
+naprzeplot(_,[],[],[]).
+naprzeplot(N,A,B,T):-npoczatek(N,A,AP),append(AP,AA,A),npoczatek(N,B,BP),append(BP,BB,B),append(BP,TT,TTT),append(AP,TTT,T),naprzeplot(N,AA,BB,TT).
+
+naprzeplot(N,A,B,T):-append(AP,AA,A),length(AP,N),append(BP,BB,B),length(BP,N),append(BP,TT,TTT),append(AP,TTT,T),naprzeplot(N,AA,BB,TT).
