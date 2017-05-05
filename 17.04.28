@@ -17,3 +17,7 @@ odwracaj([A|T],L):-odwracaj(T,B),append(B,[A],L).
 
 środkowy([X],X).
 środkowy(A,X):-append([_|B],[_],A),środkowy(B,X).
+
+doposort(X,[],[X]).
+doposort(X,Lista,T):-append(Pocz,Kon,Lista),append(_,[Pocz2],Pocz),append([Kon1],_,Kon),Pocz2<X,Kon1>X,append(Pocz,[X|Kon],T).
+
