@@ -1,0 +1,19 @@
+doposort(X,[],[X]).
+doposort(X,[H|T],[X,H|T]):-X<H.
+doposort(X,[H|T],[H|G]):-H=<X,doposort(X,T,G).
+
+wstawsort([],[]).
+wstawsort([H|T],J):-wstawsort(T,K),doposort(H,K,J).
+
+zamień([X],[X]).
+zamień([X,Y|T],[Y,X|T]):-X>=Y.
+zamień([X,Y|T],[X|G]):-X<Y,zamień([Y|T],G).
+
+
+bąbel(Lista,Lista):-zamień(Lista,Lista).
+bąbel(Lista,Wynik):-zamień(Lista,Wynikzam),Lista \= Wynikzam,bąbel(Wynikzam,Wynik).
+
+podział(_,[],[],[]).
+podział(X,[H|T],[H|M],W):-H<X,podział(X,T,M,W).
+podział(X,[H|T],M,[H|W]):-H>=X,podział(X,T,M,W).
+
