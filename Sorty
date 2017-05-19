@@ -21,6 +21,8 @@ kwiksort([],[]).
 kwiksort([H|T],Wynik):-podział(H,T,Mn,Wi),kwiksort(Mn,SortedMn),kwiksort(Wi,SortedWi),append(SortedMn,[H|SortedWi],Wynik).
 
 lenpodział(_,[],[],[]).
+lenpodział(X,[H|T],[H|M],W):-length(H,LenH),length(X,LenX),LenH<LenX,lenpodział(X,T,M,W).
+lenpodział(X,[H|T],M,[H|W]):-length(H,LenH),length(X,LenX),LenH>=LenX,lenpodział(X,T,M,W).
 
-lenkwik(_,_).
-
+lenkwik([],[]).
+lenkwik([H|T],Wynik):-lenpodział(H,T,Mn,Wi),lenkwik(Mn,SortedMn),lenkwik(Wi,SortedWi),append(SortedMn,[H|SortedWi],Wynik).
