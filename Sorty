@@ -1,11 +1,3 @@
-doposort(X,[],[X]).
-doposort(X,[H|T],[X,H|T]):-X<H.
-doposort(X,[H|T],[H|G]):-H=<X,doposort(X,T,G).
-
-wstawsort([],[]).
-wstawsort([H|T],J):-wstawsort(T,K),doposort(H,K,J).
-
-zamień([X],[X]).
 zamień([X,Y|T],[Y,X|T]):-X>=Y.
 zamień([X,Y|T],[X|G]):-X<Y,zamień([Y|T],G).
 
@@ -26,3 +18,10 @@ lenpodział(X,[H|T],M,[H|W]):-length(H,LenH),length(X,LenX),LenH>=LenX,lenpodzia
 
 lenkwik([],[]).
 lenkwik([H|T],Wynik):-lenpodział(H,T,Mn,Wi),lenkwik(Mn,SortedMn),lenkwik(Wi,SortedWi),append(SortedMn,[H|SortedWi],Wynik).
+
+dispodział(_,_,[],[],[]).
+dispodział(Key,X,[H|T],[H|M],W):-abs(H-Key)<abs(X-Key),dispodział(Key,X,T,M,W).
+dispodział(Key,X,[H|T],M,[H|W]):-abs(H-Key)>=abs(X-Key),dispodział(Key,X,T,M,W).
+
+diskwiksort([],[]).
+diskwiksort(Key,[H|T],Wynik):-dispodział(Key,H,T,Mn,Wi),diskwiksort(Mn,SortedMn),diskwiksort(Wi,SortedWi),append(SortedMn,[H|SortedWi],Wynik).
