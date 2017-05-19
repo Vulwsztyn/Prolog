@@ -17,3 +17,10 @@ podział(_,[],[],[]).
 podział(X,[H|T],[H|M],W):-H<X,podział(X,T,M,W).
 podział(X,[H|T],M,[H|W]):-H>=X,podział(X,T,M,W).
 
+kwiksort([],[]).
+kwiksort([H|T],Wynik):-podział(H,T,Mn,Wi),kwiksort(Mn,SortedMn),kwiksort(Wi,SortedWi),append(SortedMn,[H|SortedWi],Wynik).
+
+lenpodział(_,[],[],[]).
+
+lenkwik(_,_).
+
