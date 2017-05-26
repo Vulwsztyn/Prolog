@@ -1,0 +1,18 @@
+licz(_,[],0).
+licz(Key,[H|T],N):-H=:=Key,licz(Key,T,L),N is L + 1.
+licz(Key,[H|T],N):-H=\=Key,licz(Key,T,N).
+
+binarise(0,[0]).
+binarise(1,[1]).
+binarise(N,Wynik):-N>1,Czy1 is mod(N,2),Nprzez2 is N//2,binarise(Nprzez2,Wynik2),append(Wynik2,[Czy1],Wynik).
+
+roznica(X,R):-binarise(X,Xbin),licz(1,Xbin,X1),licz(0,Xbin,X0),R is X1-X0.
+
+podzial(_,[],[],[]).
+podzial(Key,[H|T],Mn,[H|Wi]):-roznica(H,Hroz),roznica(Key,Kroz),Hroz>=Kroz,podzial(Key,T,Mn,Wi).
+podzial(Key,[H|T],[H|Mn],Wi):-roznica(H,Hroz),roznica(Key,Kroz),Hroz<Kroz,podzial(Key,T,Mn,Wi).
+
+mysort([],[]).
+mysort([H|T],Sorted):-podzial(H,T,Mn,Wi),mysort(Mn,SortedMn),mysort(Wi,SortedWi),append(SortedMn,[H|SortedWi],Sorted).
+
+wynik(X):-mysort([15,11,12,17],X).
