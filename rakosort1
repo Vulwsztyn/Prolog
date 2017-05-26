@@ -1,6 +1,6 @@
 licz(_,[],0).
-licz(Key,[H|T],N):-H=:=Key,licz(Key,T,L),N is L + 1.
-licz(Key,[H|T],N):-H=\=Key,licz(Key,T,N).
+licz(CoJaLicze,[H|T],Ile):-H=:=CoJaLicze,licz(CoJaLicze,T,Ileminus1),Ile is Ileminus1 + 1.
+licz(CoJaLicze,[H|T],Ile):-H=\=CoJaLicze,licz(CoJaLicze,T,Ile).
 
 binarise(0,[0]).
 binarise(1,[1]).
