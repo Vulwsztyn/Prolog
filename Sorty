@@ -1,3 +1,4 @@
+zamień([X],[X]).
 zamień([X,Y|T],[Y,X|T]):-X>=Y.
 zamień([X,Y|T],[X|G]):-X<Y,zamień([Y|T],G).
 
